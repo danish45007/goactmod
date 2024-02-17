@@ -21,13 +21,14 @@ type AutoScaler struct {
 }
 
 // NewAutoScaler creates a new auto scaler
-func GetAutoScaler(assignerActor *AssignerActor) *AutoScaler {
+func GetAutoScaler(assignerActor *AssignerActor, poolStarted chan bool) *AutoScaler {
 	scaler := &AutoScaler{
 		AssignerActor: assignerActor,
 		lastActorId:   0,
 		ClosingSignal: make(chan bool),
 		ClosedSignal:  make(chan bool),
 	}
+	go scaler.Run(poolStarted)
 	return scaler
 }
 
