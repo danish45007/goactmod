@@ -43,7 +43,7 @@ func CreateActorEngine(name string, config *actor.Config) *ActorEngine {
 	wg := &sync.WaitGroup{}
 	actorPool := actor.CreateTaskActorPool(wg)
 	tracker := tracker.CreateTracker(name)
-	assignerActor := actor.CreateAssignerActor(actorPool, tracker, config)
+	assignerActor := actor.CreateAssignerActor(name, actorPool, tracker, config)
 	engine := &ActorEngine{
 		name:     name,
 		wg:       wg,

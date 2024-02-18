@@ -20,8 +20,9 @@ type AssignerActor struct {
 	*Config
 }
 
-func CreateAssignerActor(pool *TaskActorPool, tracker *tracker.Tracker, config *Config) entities.Actor {
+func CreateAssignerActor(name string, pool *TaskActorPool, tracker *tracker.Tracker, config *Config) entities.Actor {
 	return &AssignerActor{
+		name:          name,
 		closeSignal:   make(chan bool),
 		tasks:         make(chan entities.Task, AssignerQueueSize),
 		assignerIndex: 0,
